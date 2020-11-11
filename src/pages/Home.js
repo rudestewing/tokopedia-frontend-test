@@ -30,9 +30,8 @@ const Home = (props) => {
     }
     
     async function fetchWildPokemons() {
-        setLoading(true);
-
         try {
+            setLoading(true);
             const response = await http.get('/pokemon', {
                 params: {
                     offset: wildPokemon.offset,
@@ -63,16 +62,10 @@ const Home = (props) => {
     }
 
     useEffect(() => {
-        return () => {
-
-        }
-    }, []);
-
-    useEffect(() => {
         setPokemons({
             pokemons: []
         });
-        
+
         fetchWildPokemons();
 
         return () => {
@@ -87,20 +80,20 @@ const Home = (props) => {
             </div>
             <div>
                 <ul className="flex justify-center">
-                    <li className={['block mx-3 py-2 px-4 bg-blue-500 text-white', {
-                        
-                    }]}>
-                        <span onClick={setPagePrevious}> Prev. Page </span>
+                    <li >
+                        <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
+                            'opacity-50': loading,
+                        }]} onClick={setPagePrevious}> Prev. Page </span>
                     </li>
-                    <li className={['block mx-3 py-2 px-4 bg-yellow-500 text-gray-800', {
-                        
-                    }]}>
-                        <span onClick={() => pageReset()}> Reset Page </span>
+                    <li >
+                        <span className={['block cursor-pointer mx-3 py-2 px-4 bg-yellow-500 hover:bg-yellow-700 hover:text-white text-gray-800', {
+                            'opacity-50': loading,
+                        }]} onClick={() => pageReset()}> Reset Page </span>
                     </li>
-                    <li className={['block mx-3 py-2 px-4 bg-blue-500 text-white', {
-                        
-                    }]}>
-                        <span onClick={setPageNext}> Next Page </span>
+                    <li >
+                        <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
+                            'opacity-50': loading,
+                        }]} onClick={setPageNext}> Next Page </span>
                     </li>
                 </ul>
             </div>
