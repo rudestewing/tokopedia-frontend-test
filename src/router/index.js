@@ -18,26 +18,28 @@ export default () => {
                             <Link to="/" className="block bg-blue-700 hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> Home </Link>
                         </li>
                         <li >
-                            <Link to="/my-pokemon" className="block bg-blue-700 hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> My Pokemon </Link>
+                            <Link to="/my-pokemons" className="block bg-blue-700 hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> My Pokemon </Link>
                         </li>
                     </ul>
                 </div>
-                <Switch>
-                    <Suspense fallback={
-                        <div>Loading...</div>
-                    }>
-                        {
-                            routes.map(({path, Component}, routeIndex) => {
-                                return <Route 
-                                    key={routeIndex} 
-                                    exact 
-                                    path={path}
-                                    component={Component}
-                                    />
-                            })
-                        }
-                    </Suspense>
-                </Switch>
+                <div className="py-10">
+                    <Switch>
+                        <Suspense fallback={
+                            <div>Loading...</div>
+                        }>
+                            {
+                                routes.map(({path, Component}, routeIndex) => {
+                                    return <Route 
+                                        key={routeIndex} 
+                                        exact 
+                                        path={path}
+                                        component={Component}
+                                        />
+                                })
+                            }
+                        </Suspense>
+                    </Switch>
+                </div>
             </BrowserRouter>
         </div>
     )

@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import http from '../utils/http';
+import TypeBadge from '../components/TypeBadge';
+import {Link} from 'react-router-dom';
 
 const PokemonDetail = (props) => {
     const {
         match, 
         activePokemon, 
         setActivePokemon,
-        myPokemons
+        myPokemons,
+        myPokemonAdded
     } = props;
 
     const {id} = match.params;
+    const [loading, setLoading] = useState(false);
 
     async function getPokemonData() {
         try {
@@ -27,9 +31,49 @@ const PokemonDetail = (props) => {
         }
     }
 
-    async function catchPokemon() {
+    function catchSuccess() {
+        alert('Gotcha!!');
 
-        // logic to catch here
+        let _myPokemon = {
+            id: activePokemon.id,
+            types: activePokemon.types,
+            moves: activePokemon.moves,
+            sprites: activePokemon.sprites,
+            name: activePokemon.name,
+            nickName: null,
+            isNickNameSet: false,
+        };
+
+        myPokemonAdded({
+            pokemon: _myPokemon
+        });
+
+        props.history.push(`/my-pokemons/${_myPokemon.id}`);
+    }
+
+    function catchFailed() {
+        alert(`${activePokemon.name} run`);
+        props.history.push("/");
+    }
+
+    async function catchPokemon() {
+        if(loading) {
+           return false; 
+        }
+
+        setLoading(true);
+
+        setTimeout(() => {
+            setLoading(false);
+
+            let condition = true;
+
+            if(condition) {
+                catchSuccess();
+            } else {
+                catchFailed();
+            }
+        }, 0);
     }
 
     function isExistsPokemon() {
@@ -52,13 +96,44 @@ const PokemonDetail = (props) => {
         }
     }, []);
     
-    
     return (
         <div>
             <div>
-                {activePokemon.name}
+                <Link to="/" className="hover:underline text-blue-700"> Back to Home </Link>
             </div>
-
+            {
+                activePokemon.sprites ?
+                    (
+                        <div className="flex justify-center items-center">
+                            <div className=" w-64 h-64 mx-auto p-5">
+                                <img src={activePokemon.sprites.front_default} alt="" className="w-full h-auto"/>
+                            </div>
+                        </div>
+                    ) :
+                    ('')
+            }
+            {
+                activePokemon.name ?
+                    (
+                        <div className="py-5 font-bold tracking-wider text-2xl text-center">
+                            {activePokemon.name}
+                        </div>
+                    ) : 
+                    ('')
+            }
+            {
+                activePokemon.types ?
+                    (
+                        <div className="flex flex-wrap justify-center">
+                            {
+                                activePokemon.types.map((type, typeIndex) => {
+                                    return <TypeBadge type={type} key={typeIndex} />
+                                })
+                            }
+                        </div>
+                    ) :
+                    ('')
+            }
             {
                 isExistsPokemon() ? 
                     (
@@ -68,6 +143,32 @@ const PokemonDetail = (props) => {
                     ) :
                     ('')
             }
+            {
+                activePokemon.id ?
+                    (
+                        <div className="text-center my-10">
+                            <button 
+                                className={`
+                                    bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 rounded-full outline-none focus:outline-none
+                                    ${loading ? 'opacity-25' : 'opacity-100'}
+                                `}
+                                onClick={catchPokemon}
+                                > 
+                                    {
+                                        loading ? 
+                                            'Calculating' :
+                                            'Catch This Pokemon'
+                                    } 
+                            </button>
+                        </div>
+                    ) :
+                    ('')
+            }
+            <div className="h-64 overflow-scroll border">
+                <pre className="whitespace-pre">
+                    {JSON.stringify(activePokemon, null, 2)}
+                </pre>
+            </div>
         </div>
     )
 }
@@ -81,7 +182,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setActivePokemon: (payload) => dispatch({type: 'activePokemon/set', payload})
+        setActivePokemon: (payload) => dispatch({type: 'activePokemon/set', payload}),
+        myPokemonAdded: (payload) => dispatch({type: 'myPokemons/added', payload})
     }
 }
 

@@ -1,19 +1,22 @@
 const initialState = [];
 
-const myPokemonsReducer = (state = initialState, action) => {
-    switch (action.type) {
+const myPokemonsReducer = (state = initialState, {type, payload}) => {
+    switch (type) {
         case 'myPokemons/loaded':
-            return [...action.payload.data];
+            return [...payload.pokemons];
 
         case 'myPokemons/added':
+            console.log('added bro');
             return [
                 ...state, 
-                action.payload.data
+                {
+                    ...payload.pokemon
+                }
             ];
 
         case 'myPokemons/released':
             return [...state,].filter((pokemon) => {
-                return pokemon.id != action.payload.id
+                return pokemon.id != payload.id
             });
     
         default:
