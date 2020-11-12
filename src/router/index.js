@@ -15,10 +15,10 @@ export default () => {
                 <div>
                     <ul className="flex justify-center bg-blue-500">
                         <li >
-                            <Link to="/" className="block bg-blue-700 hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> Home </Link>
+                            <Link to="/" className="block hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> Home </Link>
                         </li>
                         <li >
-                            <Link to="/my-pokemons" className="block bg-blue-700 hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> My Pokemon </Link>
+                            <Link to="/my-pokemons" className="block hover:bg-indigo-800 text-white font-semibold tracking-wider px-5 py-2 "> My Pokemon </Link>
                         </li>
                     </ul>
                 </div>
