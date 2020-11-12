@@ -12,13 +12,14 @@ const PokemonList = (props) => {
             {
                 pokemons.length ? 
                     pokemons.map((pokemon, index) => {
-                        let {sprites, name} = pokemon;
+                        let {sprites, name, owned_count} = pokemon;
                         
                         return (
                             <Link key={index} to={`/pokemon-detail/${pokemon.id}`} className="block">
                                 <PokemonCardSmall 
                                     sprites={sprites}
                                     name={name}
+                                    ownedCount={owned_count}
                                 />
                             </Link>
                         )

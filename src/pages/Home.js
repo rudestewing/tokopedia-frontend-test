@@ -7,6 +7,7 @@ import PokemonList from '../components/PokemonList';
 const Home = (props) => {
     const {
         wildPokemon,
+        myPokemons,
         setPokemons,
         setPageNext,
         setPagePrevious,
@@ -15,10 +16,25 @@ const Home = (props) => {
 
     const [loading, setLoading] = useState(false);
 
+    function ownedCount(pokemon) {
+        return myPokemons.filter((myPokemon) => {
+            return myPokemon.id === pokemon.id;
+        }).length;
+    }
+
     async function getPokemonData(pokemon) {
         try {
             const response = await http.get(`/pokemon/${pokemon.name}`);
-            return response.data;
+
+            let _pokemon = response.data;
+            let {id, name, sprites} = _pokemon;
+            
+            return {
+                id,
+                name,
+                sprites,
+                owned_count: ownedCount(_pokemon)
+            };
 
         } catch (error) {
             console.log('error getting pokemon data :(', error);
@@ -104,6 +120,7 @@ const Home = (props) => {
 const mapStateToProps = (state) => {
     return {
         wildPokemon: state.wildPokemon,
+        myPokemons: state.myPokemons
     }
 }
 

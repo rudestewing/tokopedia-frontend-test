@@ -17,6 +17,10 @@ const PokemonDetail = (props) => {
     const [loading, setLoading] = useState(false);
 
     async function getPokemonData() {
+        setActivePokemon({
+            pokemon: {}
+        });
+        
         try {
             const response = await http.get(`/pokemon/${id}`);
 
@@ -85,17 +89,12 @@ const PokemonDetail = (props) => {
 
     function isExistsPokemon() {
         let existsPokemon = myPokemons.find((pokemon) => {
-            return pokemon.id === id;
+            return pokemon.id == id;
         });
-
         return existsPokemon ? true : false;
     }
 
     useEffect(() => {
-        setActivePokemon({
-            pokemon: {}
-        });
-        
         getPokemonData();
 
         return () => {
@@ -142,15 +141,6 @@ const PokemonDetail = (props) => {
                     ('')
             }
             {
-                isExistsPokemon() ? 
-                    (
-                        <div>
-                            you aleady have this pokemon
-                        </div>
-                    ) :
-                    ('')
-            }
-            {
                 activePokemon.id ?
                     (
                         <div className="text-center my-10">
@@ -167,6 +157,15 @@ const PokemonDetail = (props) => {
                                             'Catch This Pokemon'
                                     } 
                             </button>
+                            {
+                                isExistsPokemon() == true ? 
+                                    (
+                                        <div>
+                                            you aleady have this pokemon
+                                        </div>
+                                    ) :
+                                    ('')
+                            }
                         </div>
                     ) :
                     ('')
