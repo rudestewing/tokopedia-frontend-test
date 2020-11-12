@@ -57,6 +57,9 @@ const PokemonDetail = (props) => {
     }
 
     async function catchPokemon() {
+        let rate = 50; //max 100;
+        let isSuccess;
+
         if(loading) {
            return false; 
         }
@@ -66,14 +69,18 @@ const PokemonDetail = (props) => {
         setTimeout(() => {
             setLoading(false);
 
-            let condition = true;
+            let randomNumber = Math.random() // random 0 - 1
 
-            if(condition) {
+            if(randomNumber < rate/100) {
+                isSuccess = true;
+            }
+
+            if(isSuccess) {
                 catchSuccess();
             } else {
                 catchFailed();
             }
-        }, 0);
+        }, 1000);
     }
 
     function isExistsPokemon() {
