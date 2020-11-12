@@ -40,12 +40,10 @@ const PokemonDetail = (props) => {
 
         let _myPokemon = {
             id: activePokemon.id,
-            types: activePokemon.types,
-            moves: activePokemon.moves,
             sprites: activePokemon.sprites,
             name: activePokemon.name,
-            nickName: null,
-            isNickNameSet: false,
+            nick_name: null,
+            is_nick_name_set: false,
         };
 
         myPokemonAdded({

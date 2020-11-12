@@ -39,7 +39,10 @@ const MyPokemonDetail = (props) => {
 
     return (
         <div>
-            my pokemon detail {id}        
+            <div>
+                
+            </div>
+
         </div>
     )
 }

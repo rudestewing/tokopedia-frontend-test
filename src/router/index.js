@@ -22,7 +22,7 @@ export default () => {
                         </li>
                     </ul>
                 </div>
-                <div className="py-10">
+                <div className="py-10 px-4">
                     <Switch>
                         <Suspense fallback={
                             <div>Loading...</div>

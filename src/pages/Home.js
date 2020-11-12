@@ -22,6 +22,14 @@ const Home = (props) => {
         }).length;
     }
 
+    function pageNext() {
+
+    }
+
+    function pagePrevious() {
+
+    }
+
     async function getPokemonData(pokemon) {
         try {
             const response = await http.get(`/pokemon/${pokemon.name}`);
@@ -99,17 +107,17 @@ const Home = (props) => {
                     <li >
                         <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
                             'opacity-50': loading,
-                        }]} onClick={setPagePrevious}> Prev. Page </span>
+                        }]} onClick={setPagePrevious}> Previous </span>
                     </li>
                     <li >
                         <span className={['block cursor-pointer mx-3 py-2 px-4 bg-yellow-500 hover:bg-yellow-700 hover:text-white text-gray-800', {
                             'opacity-50': loading,
-                        }]} onClick={() => pageReset()}> Reset Page </span>
+                        }]} onClick={() => pageReset()}> Reset </span>
                     </li>
                     <li >
                         <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
                             'opacity-50': loading,
-                        }]} onClick={setPageNext}> Next Page </span>
+                        }]} onClick={setPageNext}> Next </span>
                     </li>
                 </ul>
             </div>
