@@ -99,28 +99,24 @@ const Home = (props) => {
 
     return (
         <div>
-            <div>
-                <PokemonList pokemons={wildPokemon.pokemons} />
-            </div>
-            <div>
-                <ul className="flex justify-center">
-                    <li >
-                        <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
-                            'opacity-50': loading,
-                        }]} onClick={setPagePrevious}> Previous </span>
-                    </li>
-                    <li >
-                        <span className={['block cursor-pointer mx-3 py-2 px-4 bg-yellow-500 hover:bg-yellow-700 hover:text-white text-gray-800', {
-                            'opacity-50': loading,
-                        }]} onClick={() => pageReset()}> Reset </span>
-                    </li>
-                    <li >
-                        <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
-                            'opacity-50': loading,
-                        }]} onClick={setPageNext}> Next </span>
-                    </li>
-                </ul>
-            </div>
+            <PokemonList pokemons={wildPokemon.pokemons} />
+            <ul className="flex justify-center w-full">
+                <li >
+                    <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
+                        'opacity-50': loading,
+                    }]} onClick={setPagePrevious}> Previous </span>
+                </li>
+                <li >
+                    <span className={['block cursor-pointer mx-3 py-2 px-4 bg-yellow-500 hover:bg-yellow-700 hover:text-white text-gray-800', {
+                        'opacity-50': loading,
+                    }]} onClick={() => pageReset()}> Reset </span>
+                </li>
+                <li >
+                    <span className={['block cursor-pointer mx-3 py-2 px-4 bg-blue-500 hover:bg-blue-800 hover:text-white text-white', {
+                        'opacity-50': loading,
+                    }]} onClick={setPageNext}> Next </span>
+                </li>
+            </ul>
         </div>
     )
 }

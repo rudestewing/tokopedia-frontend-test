@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PokemonCardSmall from '../components/PokemonCardSmall';
 import MyPokemonList from '../components/MyPokemonList';

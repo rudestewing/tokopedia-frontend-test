@@ -8,7 +8,7 @@ const PokemonList = (props) => {
     const {pokemons} = props;
 
     return (
-        <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-10">
+        <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-10">
             {
                 pokemons.length ? 
                     pokemons.map((pokemon, index) => {

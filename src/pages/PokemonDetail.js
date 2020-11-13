@@ -102,8 +102,8 @@ const PokemonDetail = (props) => {
     
     return (
         <div>
-            <div>
-                <Link to="/" className="hover:underline text-blue-700"> Back to Home </Link>
+            <div className="text-center">
+                <a href="/" className="text-blue-600 underline"> back to Home </a>
             </div>
             {
                 activePokemon.sprites ?
