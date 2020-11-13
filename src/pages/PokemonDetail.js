@@ -5,6 +5,8 @@ import TypeBadge from '../components/TypeBadge';
 import {Link} from 'react-router-dom';
 
 const PokemonDetail = (props) => {
+    const [attempt, setAttempt] = useState(0);
+    
     const {
         match, 
         activePokemon, 
@@ -55,10 +57,11 @@ const PokemonDetail = (props) => {
 
     function catchFailed() {
         alert(`${activePokemon.name} run`);
-        props.history.push("/");
+        // props.history.push("/");
     }
 
     async function catchPokemon() {
+        setAttempt(attempt + 1);
         let rate = 50; //max 100;
         let isSuccess;
 
@@ -151,8 +154,8 @@ const PokemonDetail = (props) => {
                                 > 
                                     {
                                         loading ? 
-                                            'Calculating' :
-                                            'Catch This Pokemon'
+                                            `Calculating` :
+                                            `Catch This Pokemon ${attempt > 0 ? 'Again' : ''}`
                                     } 
                             </button>
                             {
@@ -168,11 +171,11 @@ const PokemonDetail = (props) => {
                     ) :
                     ('')
             }
-            <div className="h-64 overflow-scroll border">
-                <pre className="whitespace-pre">
+            {/* <div className="h-64 overflow-scroll border">
+                <pre className="bg-white p-5 overflow-x">
                     {JSON.stringify(activePokemon, null, 2)}
                 </pre>
-            </div>
+            </div> */}
         </div>
     )
 }
