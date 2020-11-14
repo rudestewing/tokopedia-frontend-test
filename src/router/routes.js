@@ -1,6 +1,6 @@
 import {lazy} from 'react';
 
-export default [
+const routes = [
     {
         path: '/',
         exact: true,
@@ -22,3 +22,5 @@ export default [
         Component: lazy(() => import('../pages/MyPokemonDetail'))
     },
 ];
+
+export default routes;

@@ -18,7 +18,7 @@ const Home = (props) => {
 
     function ownedCount(pokemon) {
         return myPokemons.filter((myPokemon) => {
-            return myPokemon.id === pokemon.id;
+            return myPokemon.real_id === pokemon.id;
         }).length;
     }
 

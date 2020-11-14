@@ -40,10 +40,16 @@ const PokemonDetail = (props) => {
     function catchSuccess() {
         alert('Gotcha!!');
 
+        const {id: real_id, sprites, name} = activePokemon;
+
         let _myPokemon = {
-            id: activePokemon.id,
-            sprites: activePokemon.sprites,
-            name: activePokemon.name,
+            id: new Date().getTime() + Math.random().toString(36).substring(7),
+            real_id,
+            name,
+            sprites: {
+                front_default: sprites.front_default,
+                back_default: sprites.back_default,
+            },
             nick_name: null,
             is_nick_name_set: false,
         };
@@ -106,7 +112,7 @@ const PokemonDetail = (props) => {
     return (
         <div>
             <div className="text-center">
-                <a href="/" className="text-blue-600 underline"> back to Home </a>
+                <Link to="/" className="text-blue-600 underline"> Back to Home</Link>
             </div>
             {
                 activePokemon.sprites ?
@@ -171,11 +177,6 @@ const PokemonDetail = (props) => {
                     ) :
                     ('')
             }
-            {/* <div className="h-64 overflow-scroll border">
-                <pre className="bg-white p-5 overflow-x">
-                    {JSON.stringify(activePokemon, null, 2)}
-                </pre>
-            </div> */}
         </div>
     )
 }
