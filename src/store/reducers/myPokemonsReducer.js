@@ -14,6 +14,18 @@ const myPokemonsReducer = (state = initialState, {type, payload}) => {
                 }
             ];
 
+        case 'myPokemons/pokemonUpdated':
+            return [
+                ...state
+            ].map((pokemon) => {
+                if(pokemon.id === payload.id) {
+                    return {
+                        ...payload.pokemon
+                    }
+                }
+                return pokemon;
+            })
+
         case 'myPokemons/released':
             return [...state,].filter((pokemon) => {
                 return pokemon.id != payload.id
