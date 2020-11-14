@@ -93,7 +93,7 @@ const TypeBadge = (props) => {
     }
 
     return (
-        <div className={`rounded-full font-semibold  px-5 py-2 mx-2 text-sm border shadow-md ${activeType().bgClass}`}>
+        <div className={`rounded-full font-semibold  px-5 py-2 text-sm border shadow-md ${activeType().bgClass}`}>
             {type.type.name}
         </div>
     )

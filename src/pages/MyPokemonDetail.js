@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import http from '../utils/http';
 import PokemonDetailInformation from '../components/PokemonDetailInformation';
 import {Link} from 'react-router-dom';
+import TypeBadge from '../components/TypeBadge';
 
 const MyPokemonDetail = (props) => {
     const {
@@ -11,7 +12,7 @@ const MyPokemonDetail = (props) => {
         activePokemon,
         setActivePokemon,
         myPokemonsPokemonUpdated,
-        myPokemonsReleased
+        myPokemonsReleased,
     } = props;
 
     const {id} = match.params;
@@ -20,9 +21,8 @@ const MyPokemonDetail = (props) => {
     const [pokemon, setPokemon] = useState(null);
     const [errors, setErrors] = useState({});
 
-
     function handleRelease() {
-        if(!window.confirm(`Are you sure want to release ${pokemon.nick_name}. it will miss you so much.`)) {
+        if(!window.confirm(`Are you sure want to release ${pokemon.nick_name || pokemon.name}.`)) {
             return;
         }
 
@@ -83,10 +83,12 @@ const MyPokemonDetail = (props) => {
             if(!myPokemon) {
                 return props.history.push('/');
             }
-    
+
             setPokemon(myPokemon);
 
-            const response = await http.get(`/pokemon/${pokemon.real_id}`);
+            const response = await http.get(`/pokemon/${myPokemon.real_id}`);
+
+            console.log(response.data);
 
             setActivePokemon({
                 pokemon: response.data
@@ -136,7 +138,7 @@ const MyPokemonDetail = (props) => {
                                                 {
                                                     errors.nick_name ?
                                                         (
-                                                            <span>
+                                                            <span className="text-red-700">
                                                                 {errors.nick_name[0]}
                                                             </span>
                                                         ) : 
@@ -159,10 +161,80 @@ const MyPokemonDetail = (props) => {
                     )
             }
             <div className="mb-5 text-center">
-                <Link to="/my-pokemons" className="bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 rounded-full outline-none focus:outline-none"> Go to my pokemon List </Link>
+                <button onClick={handleRelease} className="bg-red-600 hover:bg-red-800 text-white px-5 py-2 rounded-full outline-none focus:outline-none">Release Pokemon</button>
+            </div>
+
+            <div className="mb-5 bg-white rounded-lg p-5">
+                {
+                    !activePokemon.types ||
+                        (
+                            <div className="mb-5">
+                                <h3 className="mb-2 font-bold">
+                                    Types
+                                </h3>
+                                <div className="flex flex-wrap">
+                                    {
+                                        activePokemon.types.map((type, typeIndex) => {
+                                            return <TypeBadge type={type} key={typeIndex} />
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                }
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {
+                        !activePokemon.stats || 
+                            (
+                                <div className="mb-5">
+                                    <h3 className="mb-2 font-bold">
+                                        Stats
+                                    </h3>
+                                    <table width="100%">
+                                        <tbody>
+                                            {
+                                                activePokemon.stats.map((stat, statIndex) => {
+                                                    return (
+                                                        <tr key={statIndex}>
+                                                            <td> {stat.stat.name} </td>
+                                                            <td>:</td>
+                                                            <td> {stat.base_stat} </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )
+                    }
+                    {
+                        !activePokemon.abilities || 
+                        (
+                            <div className="mb-5">
+                                <h3 className="mb-2 font-bold">
+                                    Abilities
+                                </h3>
+                                <table width="100%">
+                                    <tbody>
+                                        {
+                                            activePokemon.abilities.map((ability, abilityIndex) => {
+                                                return (
+                                                    <tr key={abilityIndex}>
+                                                        <td>{ability.ability.name}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
             <div className="mb-5 text-center">
-                <button onClick={handleRelease} className="bg-red-600 hover:bg-red-800 text-white px-5 py-2 rounded-full outline-none focus:outline-none">Release Pokemon</button>
+                <Link to="/my-pokemons" className="bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 rounded-full outline-none focus:outline-none"> Go to my pokemon List </Link>
             </div>
         </Fragment>
     )
@@ -171,7 +243,7 @@ const MyPokemonDetail = (props) => {
 const mapStateToProps = (state) => {
     return {
         activePokemon: state.activePokemon,
-        myPokemons: state.myPokemons
+        myPokemons: state.myPokemons,
     }
 }
 

@@ -6,6 +6,8 @@ import {Link} from 'react-router-dom';
 
 const PokemonDetail = (props) => {
     const [attempt, setAttempt] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const {
         match, 
@@ -16,7 +18,6 @@ const PokemonDetail = (props) => {
     } = props;
 
     const {id} = match.params;
-    const [loading, setLoading] = useState(false);
 
     async function getPokemonData() {
         setActivePokemon({
@@ -38,8 +39,6 @@ const PokemonDetail = (props) => {
     }
 
     function catchSuccess() {
-        alert('Gotcha!!');
-
         const {id: real_id, sprites, name} = activePokemon;
         const catchTime = new Date().getTime();
 
@@ -65,11 +64,16 @@ const PokemonDetail = (props) => {
     }
 
     function catchFailed() {
-        alert(`${activePokemon.name} run`);
-        // props.history.push("/");
+        setErrors({
+            catch: [
+                `${activePokemon.name} run, try again!`
+            ]
+        })
     }
 
     async function catchPokemon() {
+        setErrors({});
+        
         setAttempt(attempt + 1);
         let rate = 50; //max 100;
         let isSuccess;
@@ -99,8 +103,9 @@ const PokemonDetail = (props) => {
 
     function isExistsPokemon() {
         let existsPokemon = myPokemons.find((pokemon) => {
-            return pokemon.id == id;
+            return pokemon.real_id == id;
         });
+        
         return existsPokemon ? true : false;
     }
 
@@ -154,6 +159,14 @@ const PokemonDetail = (props) => {
                 activePokemon.id ?
                     (
                         <div className="text-center my-10">
+                            {
+                                !errors.catch ||
+                                    (
+                                        <div className="text-red-600 text-center mb-5">
+                                            {errors.catch[0]}
+                                        </div>
+                                    ) 
+                            }
                             <button 
                                 className={`
                                     bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 rounded-full outline-none focus:outline-none
