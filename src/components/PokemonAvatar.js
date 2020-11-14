@@ -1,11 +1,11 @@
 import React from 'react';
 
-const MyPokemonCard = (props) => {
+const PokemonAvatar = (props) => {
     return (
         <div>
-            
+
         </div>
     )
 }
 
-export default MyPokemonCard;
+export default PokemonAvatar;

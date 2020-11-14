@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import PokemonCardSmall from './PokemonCardSmall';
+import WildPokemonCard from './WildPokemonCard';
 
 const PokemonList = (props) => {
     const {pokemons} = props;
@@ -16,7 +16,7 @@ const PokemonList = (props) => {
                         
                         return (
                             <Link key={index} to={`/pokemon-detail/${pokemon.id}`} className="block">
-                                <PokemonCardSmall 
+                                <WildPokemonCard 
                                     sprites={sprites}
                                     name={name}
                                     ownedCount={owned_count}
