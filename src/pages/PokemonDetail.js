@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 const PokemonDetail = (props) => {
     const [attempt, setAttempt] = useState(0);
-    
+
     const {
         match, 
         activePokemon, 
@@ -41,9 +41,10 @@ const PokemonDetail = (props) => {
         alert('Gotcha!!');
 
         const {id: real_id, sprites, name} = activePokemon;
+        const catchTime = new Date().getTime();
 
         let _myPokemon = {
-            id: new Date().getTime() + Math.random().toString(36).substring(7),
+            id:  Math.random().toString(36).substring(7) + String(catchTime),
             real_id,
             name,
             sprites: {
@@ -52,6 +53,8 @@ const PokemonDetail = (props) => {
             },
             nick_name: null,
             is_nick_name_set: false,
+            catch_time: catchTime,
+            attempt,
         };
 
         myPokemonAdded({

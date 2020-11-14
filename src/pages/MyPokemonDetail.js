@@ -7,8 +7,8 @@ const MyPokemonDetail = (props) => {
     const {
         match, 
         myPokemons,
-        activePokemon,
-        setActivePokemon
+        // activePokemon,
+        // setActivePokemon
     } = props;
 
     const {id} = match.params;
@@ -16,9 +16,8 @@ const MyPokemonDetail = (props) => {
     const [nickName, setNickName] = useState('');
     const [pokemon, setPokemon] = useState(null);
 
-
     async function getPokemonData() {
-        
+
     }
     
     function getMyPokemonData() {
@@ -32,8 +31,6 @@ const MyPokemonDetail = (props) => {
 
         console.log(myPokemon);
 
-
-        
         // setActivePokemon({
         //     pokemon: {}
         // });
@@ -57,9 +54,12 @@ const MyPokemonDetail = (props) => {
     }, []);
 
     return (
-        <div>
-            <div>
-                
+        <div className="flex flex-wrap">
+            <div className="w-full md:w-1/3 lg:w-4/12">
+                Avatar pokemon
+            </div>
+            <div className="w-full md:w-2/3 lg:w-8/12">
+                Detail pokemon
             </div>
         </div>
     )

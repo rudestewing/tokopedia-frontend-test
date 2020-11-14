@@ -43,7 +43,6 @@ const PokemonCardSmall = (props) => {
             <div className="block tracking-wider font-semibold text-center py-2 mb-3">
                 {name}
             </div>
-            
         </div>
     )
 }
