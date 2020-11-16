@@ -1,6 +1,6 @@
 const initialState = {}
 
-export default (state = initialState, {type, payload}) => {
+const activePokemonReducer = (state = initialState, {type, payload}) => {
     switch (type) {
         case 'activePokemon/set':
             return {
@@ -11,3 +11,5 @@ export default (state = initialState, {type, payload}) => {
             return state;
     }
 }
+
+export default activePokemonReducer;

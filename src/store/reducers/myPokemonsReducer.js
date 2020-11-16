@@ -28,7 +28,7 @@ const myPokemonsReducer = (state = initialState, {type, payload}) => {
 
         case 'myPokemons/released':
             return [...state,].filter((pokemon) => {
-                return pokemon.id != payload.id
+                return String(pokemon.id) !== String(payload.id)
             });
     
         default:

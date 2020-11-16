@@ -4,7 +4,7 @@ const initialState = {
     pokemons: [],
 }
 
-export default (state = initialState, {type, payload}) => {
+const wildPokemonReducer = (state = initialState, {type, payload}) => {
     switch (type) {
         case 'wildPokemon/setPokemons':
             return {
@@ -35,3 +35,5 @@ export default (state = initialState, {type, payload}) => {
             return state;
     }
 }
+
+export default wildPokemonReducer;

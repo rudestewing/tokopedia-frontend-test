@@ -58,7 +58,7 @@ const TypeBadge = (props) => {
         },
         {
             name: "psychic",
-            bgClass: 'bg-purple-800',
+            bgClass: 'bg-purple-800 text-white',
         },
         {
             name: "ice",

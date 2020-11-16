@@ -103,7 +103,7 @@ const PokemonDetail = (props) => {
 
     function isExistsPokemon() {
         let existsPokemon = myPokemons.find((pokemon) => {
-            return pokemon.real_id == id;
+            return String(pokemon.real_id) === String(id);
         });
         
         return existsPokemon ? true : false;
