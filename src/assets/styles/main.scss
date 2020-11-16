@@ -1,4 +1,4 @@
-@import '../css/tailwind.output.css';
+@import 'tailwindcss/base';
 
 html, body {
     height: 100%;
@@ -8,16 +8,10 @@ html, body {
     min-height: 100%;
     background-color: lightgray;
     position: relative;
+    @apply bg-blue-700;
 }
 
-.form {
-    
-    &__label {
 
-    }
+@import 'tailwindcss/components';
 
-    &__control {
-
-    }
-
-}
+@import 'tailwindcss/utilities';
