@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import store from '../store';
 import http from '../utils/http';
 import PokemonList from '../components/PokemonList';
 
@@ -20,14 +19,6 @@ const Home = (props) => {
         return myPokemons.filter((myPokemon) => {
             return myPokemon.real_id === pokemon.id;
         }).length;
-    }
-
-    function pageNext() {
-
-    }
-
-    function pagePrevious() {
-
     }
 
     async function getPokemonData(pokemon) {

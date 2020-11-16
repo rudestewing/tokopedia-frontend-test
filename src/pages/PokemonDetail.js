@@ -181,7 +181,7 @@ const PokemonDetail = (props) => {
                                     } 
                             </button>
                             {
-                                isExistsPokemon() == true ? 
+                                isExistsPokemon() === true ? 
                                     (
                                         <div>
                                             you aleady have this pokemon

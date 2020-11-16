@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import http from '../utils/http';
-import PokemonDetailInformation from '../components/PokemonDetailInformation';
 import {Link} from 'react-router-dom';
 import TypeBadge from '../components/TypeBadge';
 
@@ -44,7 +43,7 @@ const MyPokemonDetail = (props) => {
         });
         
         let existsPokemonWithSameNickName = myPokemons.find((myPokemonItem) => {
-            return String(myPokemonItem.nick_name).toLowerCase() == String(nickName).toLocaleLowerCase();
+            return String(myPokemonItem.nick_name).toLowerCase() === String(nickName).toLocaleLowerCase();
         });
 
         if(existsPokemonWithSameNickName) {
@@ -77,7 +76,7 @@ const MyPokemonDetail = (props) => {
             });
 
             let myPokemon = myPokemons.find((pokemon) => {
-                return pokemon.id == id;
+                return String(pokemon.id) === String(id);
             });
             
             if(!myPokemon) {
@@ -101,6 +100,8 @@ const MyPokemonDetail = (props) => {
     
     useEffect(() => {
         getPokemonData();
+
+        return () => {}
     }, []);
 
     return (

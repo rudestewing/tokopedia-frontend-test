@@ -88,7 +88,7 @@ const TypeBadge = (props) => {
 
     function activeType() {
         return availableTypes.find(item => {
-            return item.name == type.type.name;
+            return String(item.name) === String(type.type.name);
         });
     }
 
